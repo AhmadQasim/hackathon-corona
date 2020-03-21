@@ -7,6 +7,8 @@
 
 // after the website has been loaded, send message to content.js so that it can start scanning the page
 // after receiving the response from content.js that it has completed the scanning process then set the status accordingly
+// we don't need this code for now
+/*
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('status').textContent = "Extension loaded";
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -15,4 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('success');
         });
     });
+});
+*/
+
+// just set the loaded status
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('status').textContent = "Extension loaded";
 });

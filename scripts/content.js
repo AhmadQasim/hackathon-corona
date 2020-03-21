@@ -14,23 +14,29 @@ var corrections = {
 	"wonach US-Präsident Donald Trump sich Zugriff auf das Unternehmen": "wonach US-Präsident Donald Trump sich Zugriff auf das Unternehmen sichern wolle ist nicht richtig",
 	"Bis ein Impfstoff gegen das neue Coronavirus Sars-CoV-2 für den Einsatz am Patienten fertig ist, wird noch einige Zeit vergehen.": "Es wird ungefähr 6-12 Monate dauern, bis der Impfstoff fertig ist"
 }
+
+// this function is called when the injected div is hovered upon
 function makealert(evt) {
 	chrome.runtime.sendMessage({myth: evt.currentTarget.myth, correct: evt.currentTarget.correct}, function(response) {
         console.log(response.returnMsg);
     });
 }
 
+// listens for the message from extension.js and then scans the current active tab DOM
+// select some particular tags and then look for target text in them
+// if the target text is found then inject a div around the tag
+// add a listener on hover event on that injected div
+// we don't need this code for now because we are not listening for extension.js anymore as we scan the web page when it loads
+/*
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
 	let i = 0;
-    var linksList = document.querySelectorAll('span.css-901oao');
+    var linksList = document.querySelectorAll('p');
     [].forEach.call(linksList, function(header) {
     	Object.keys(corrections).forEach(function(key) {
 	    	if (header.innerHTML.includes(key)){
 	    		let div_id = 'div-' + i;
 	    		header.style.backgroundColor = "yellow";
 	    		header.outerHTML = '<div id=' + div_id + '>' + header.outerHTML + '</div>';
-	    		// header.outerHTML = '<a href="#" data-toggle="tooltip" title="Some tooltip text!">' + header.outerHTML + '</a>'
-	    		// header.outerHTML = '<div class="tooltip">' + header.outerHTML + '<span class="tooltiptext">Tooltip text</span> </div>';
 	    		var div = document.getElementById(div_id);
 	    		div.addEventListener("mouseover", makealert);
 	    		div.correct = corrections[key]
@@ -41,3 +47,26 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     });
     sendResponse({data: true, success: true});
 });
+*/
+
+
+// when the web page is loaded then scan it
+// for scanning info see the comments above of the commented listener
+window.onload = function() {
+	let i = 0;
+    var linksList = document.querySelectorAll('p');
+    [].forEach.call(linksList, function(header) {
+    	Object.keys(corrections).forEach(function(key) {
+	    	if (header.innerHTML.includes(key)){
+	    		let div_id = 'div-' + i;
+	    		header.style.backgroundColor = "yellow";
+	    		header.outerHTML = '<div id=' + div_id + '>' + header.outerHTML + '</div>';
+	    		var div = document.getElementById(div_id);
+	    		div.addEventListener("mouseover", makealert);
+	    		div.correct = corrections[key]
+	    		div.myth = key
+	    		i++;
+	    	}
+	    });
+    });
+};
