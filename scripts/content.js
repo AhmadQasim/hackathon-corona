@@ -17,9 +17,20 @@ var corrections = {
 
 // this function is called when the injected div is hovered upon
 function makealert(evt) {
-	chrome.runtime.sendMessage({myth: evt.currentTarget.myth, correct: evt.currentTarget.correct}, function(response) {
+	chrome.runtime.sendMessage({myth: evt.currentTarget.myth, correct: evt.currentTarget.correct, notif_id: evt.currentTarget.notif_id}, function(response) {
         console.log(response.returnMsg);
     });
+}
+
+// generate random notication id everytime
+function makeid(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
 }
 
 // listens for the message from extension.js and then scans the current active tab DOM
@@ -52,21 +63,29 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
 
 // when the web page is loaded then scan it
 // for scanning info see the comments above of the commented listener
-window.onload = function() {
-	let i = 0;
-    var linksList = document.querySelectorAll('p');
-    [].forEach.call(linksList, function(header) {
-    	Object.keys(corrections).forEach(function(key) {
-	    	if (header.innerHTML.includes(key)){
-	    		let div_id = 'div-' + i;
-	    		header.style.backgroundColor = "yellow";
-	    		header.outerHTML = '<div id=' + div_id + '>' + header.outerHTML + '</div>';
-	    		var div = document.getElementById(div_id);
-	    		div.addEventListener("mouseover", makealert);
-	    		div.correct = corrections[key]
-	    		div.myth = key
-	    		i++;
-	    	}
-	    });
-    });
-};
+document.addEventListener('readystatechange', event => {
+
+    if (event.target.readyState === "interactive") {
+    }
+
+    if (event.target.readyState === "complete") {
+        	let i = 0;
+		    var linksList = document.querySelectorAll('p');
+		    [].forEach.call(linksList, function(header) {
+		    	Object.keys(corrections).forEach(function(key) {
+			    	if (header.innerHTML.includes(key)){
+			    		let div_id = 'div-' + i;
+			    		header.style.backgroundColor = "yellow";
+			    		header.outerHTML = '<div id=' + div_id + '>' + header.outerHTML + '</div>';
+			    		var div = document.getElementById(div_id);
+			    		div.addEventListener("mouseover", makealert);
+			    		div.correct = corrections[key]
+			    		div.myth = key
+			    		div.notif_id = makeid(10)
+			    		i++;
+			    	}
+			    });
+		    });
+    }
+
+});
