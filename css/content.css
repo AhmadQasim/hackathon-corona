@@ -6,12 +6,12 @@
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
+  background-color: white;
+  color: black;
   padding: 5px 0;
+  border-color: #D3D2D2;
+  border-width: medium;
+  text-align: left;
   
   /* Position the tooltip */
   position: absolute;
@@ -19,6 +19,21 @@
   top: 100%;
   left: 50%;
   margin-left: -60px;
+  width: 300px;
+}
+
+img {
+  width: 80px;
+  height: 80px;
+  float: left;
+}
+
+span {
+  font-size: small;
+}
+
+a {
+  font-size: small;
 }
 
 .tooltip:hover .tooltiptext {

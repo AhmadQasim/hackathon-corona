@@ -16,7 +16,10 @@ var corrections = {
 
 
 var keywords_facts = {
-	0: {keywords: ['uk', 'lockdown', 'home', 'rest', 'restricted'], sentence: "Prime Minister Boris Johnson has closed pubs, restaurants, cafes, nightclubs, gyms, theatres, cinemas and schools, and asked members of the public to start working from home 'where they possibly can'."}
+	0: {keywords: ['uk', 'lockdown', 'home', 'rest', 'restricted'],
+		sentence: "Prime Minister Boris Johnson has closed pubs, restaurants, cafes, nightclubs, gyms, theatres, cinemas and schools, and asked members of the public to start working from home 'where they possibly can'.",
+		source: "https://twitter.com/MedUni_Wien/status/1238782938344554496"
+	}
 }
 
 // this function is called when the injected div is hovered upon
@@ -148,9 +151,13 @@ async function nlpStuff(event){
 				    	dist = tf.losses.cosineDistance(sum, keywordVectors[j]);
 				    	if (dist.dataSync() > 0.7){
 				    		let div_id = 'div-' + i;
-				    		node.style.backgroundColor = "yellow";
+				    		node.style.backgroundColor = "#C5FFBD";
 				    		// node.outerHTML = '<div id=' + div_id + '>' + node.outerHTML + '</div>';
-				    		node.outerHTML = '<div id=' + div_id + ' class="tooltip">' + node.outerHTML + '<span class="tooltiptext">' + keywords_facts[j].sentence + '</span></div>'
+				    		node.outerHTML = '<div id=' + div_id + ' class="tooltip">'
+								+ node.outerHTML + '<span class="tooltiptext" font-family="Crimson Text"> ' +
+								'<img src="https://pbs.twimg.com/profile_images/1144501389290299392/NT-KR-vT_400x400.jpg">' +
+								keywords_facts[j].sentence + ' ' +
+								'<a href='+ keywords_facts[j].source +' color="blue">(Quelle)</a></span></div>'
 				    		var div = document.getElementById(div_id);
 				    		div.addEventListener("mouseover", makealert);
 				    		div.correct = keywords_facts[j].sentence

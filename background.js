@@ -26,12 +26,7 @@ chrome.runtime.onInstalled.addListener(function() {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     chrome.notifications.create(
         "notification-" + request.notif_id,
-        {   
-            type: 'basic', 
-            iconUrl: 'https://www.tf.uni-freiburg.de/de/bilder/icons/achtung.png/image', 
-            title: "Achtung!", 
-            priority: 1,
-            message: request.myth + request.correct
+        {
             type: 'list',
             iconUrl: 'https://image.flaticon.com/icons/svg/2709/2709163.svg',
             title: "CoVid Mythbuster",
