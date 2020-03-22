@@ -17,9 +17,10 @@ var corrections = {
 
 // this function is called when the injected div is hovered upon
 function makealert(evt) {
-	chrome.runtime.sendMessage({myth: evt.currentTarget.myth, correct: evt.currentTarget.correct, notif_id: evt.currentTarget.notif_id}, function(response) {
-        console.log(response.returnMsg);
-    });
+	// chrome.runtime.sendMessage({myth: evt.currentTarget.myth, correct: evt.currentTarget.correct, notif_id: evt.currentTarget.notif_id}, function(response) {
+    //    console.log(response.returnMsg);
+    //});
+
 }
 
 // generate random notication id everytime
@@ -76,7 +77,8 @@ document.addEventListener('readystatechange', event => {
 			    	if (header.innerHTML.includes(key)){
 			    		let div_id = 'div-' + i;
 			    		header.style.backgroundColor = "yellow";
-			    		header.outerHTML = '<div id=' + div_id + '>' + header.outerHTML + '</div>';
+			    		// header.outerHTML = '<div id=' + div_id + '>' + header.outerHTML + '</div>';
+			    		header.outerHTML = '<div id=' + div_id + ' class="tooltip">' + header.outerHTML + '<span class="tooltiptext">' + corrections[key] + '</span></div>'
 			    		var div = document.getElementById(div_id);
 			    		div.addEventListener("mouseover", makealert);
 			    		div.correct = corrections[key]
