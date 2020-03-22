@@ -8,9 +8,9 @@
 
 // the dictionary which holds the combination of our corrections
 var corrections = {
-	"Beschleunigt und sogar zum Tod führen kann.. Also an Alle Entfernt die Ibu Pillen das ist der Tod in Pillenform": "Achtung, bei den derzeit kursierenden WhatsApp-Text- und Sprachnachrichten rund um angebliche Forschungsergebnisse der 'Wiener Uniklinik' zu einem Zusammenhang zwischen Ibuprofen und Covid19 handelt es sich um #FakeNews, die in keinerlei Verbindung mit der #MedUniWien stehen.",
-	"Deutschland und die USA konkurrieren um ein Tübinger Unternehmen, das an einem Impfstoff gegen": "CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt.",
-	"The Trump administration attempted to persuade a German firm developing a possible vaccine for coronavirus to move its research work to the United States,": "CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt."
+	"Beschleunigt und sogar zum Tod führen kann.. Also an Alle Entfernt die Ibu Pillen das ist der Tod in Pillenform": ["Achtung, bei den derzeit kursierenden WhatsApp-Text- und Sprachnachrichten rund um angebliche Forschungsergebnisse der 'Wiener Uniklinik' zu einem Zusammenhang zwischen Ibuprofen und Covid19 handelt es sich um #FakeNews, die in keinerlei Verbindung mit der #MedUniWien stehen", "https://en.wikipedia.org/wiki/Niall_Ferguson", "https://pbs.twimg.com/profile_images/1144501389290299392/NT-KR-vT_400x400.jpg"],
+	"Deutschland und die USA konkurrieren um ein Tübinger Unternehmen, das an einem Impfstoff gegen": ["CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt.", "abc", "abc"],
+	"The Trump administration attempted to persuade a German firm developing a possible vaccine for coronavirus to move its research work to the United States,": ["CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt.", "abc", "abc"]
 }
 
 
@@ -185,9 +185,13 @@ async function nlpStuff(event){
 		    	Object.keys(corrections).forEach(function(key) {
 			    	if (node.textContent.includes(key)){
 			    		let div_id = 'div-' + i;
-			    		node.style.backgroundColor = "yellow";
-			    		// node.outerHTML = '<div id=' + div_id + '>' + node.outerHTML + '</div>';
-			    		node.outerHTML = '<div id=' + div_id + ' class="tooltip">' + node.outerHTML + '<span class="tooltiptext">' + corrections[key] + '</span></div>'
+			    		node.style.backgroundColor = "#FCCCC1";
+				    		// node.outerHTML = '<div id=' + div_id + '>' + node.outerHTML + '</div>';
+				    		node.outerHTML = '<div id=' + div_id + ' class="tooltip">'
+								+ node.outerHTML + '<span class="tooltiptext" font-family="Crimson Text"> ' +
+								'<img src="https://pbs.twimg.com/profile_images/1144501389290299392/NT-KR-vT_400x400.jpg">' +
+								corrections[key][0] + ' ' +
+								'<a href='+ corrections[key][1] +' color="blue">(Quelle)</a></span></div>'
 			    		var div = document.getElementById(div_id);
 			    		div.addEventListener("mouseover", makealert);
 			    		div.correct = corrections[key]
