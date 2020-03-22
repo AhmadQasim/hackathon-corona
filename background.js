@@ -27,10 +27,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     chrome.notifications.create(
         'name-for-notification',
         {   
-            type: 'basic', 
-            iconUrl: 'https://www.tf.uni-freiburg.de/de/bilder/icons/achtung.png/image', 
-            title: "Achtung!", 
-            message: request.myth + request.correct 
+            type: 'list',
+            iconUrl: 'https://image.flaticon.com/icons/svg/2709/2709163.svg', 
+            title: "CoVid Mythbuster", 
+            message: " abc ",
+            items: [{ title: "Myth", message: request.myth},
+                    { title: "Fact", message: request.correct}]
         },
         function(notificationId) {} 
     );
