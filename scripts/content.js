@@ -8,9 +8,9 @@
 
 // the dictionary which holds the combination of our corrections
 var corrections = {
-	"Beschleunigt und sogar zum Tod führen kann.. Also an Alle Entfernt die Ibu Pillen das ist der Tod in Pillenform": ["Achtung, bei den derzeit kursierenden WhatsApp-Text- und Sprachnachrichten rund um angebliche Forschungsergebnisse der 'Wiener Uniklinik' zu einem Zusammenhang zwischen Ibuprofen und Covid19 handelt es sich um #FakeNews, die in keinerlei Verbindung mit der #MedUniWien stehen", "https://en.wikipedia.org/wiki/Niall_Ferguson", "https://pbs.twimg.com/profile_images/1144501389290299392/NT-KR-vT_400x400.jpg"],
-	"Deutschland und die USA konkurrieren um ein Tübinger Unternehmen, das an einem Impfstoff gegen": ["CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt.", "abc", "abc"],
-	"The Trump administration attempted to persuade a German firm developing a possible vaccine for coronavirus to move its research work to the United States,": ["CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt.", "abc", "abc"]
+	"Beschleunigt und sogar zum Tod führen kann.. Also an Alle Entfernt die Ibu Pillen das ist der Tod in Pillenform": ["Angebliche Forschungsergebnisse der 'Wiener Uniklinik' zu einem Zusammenhang zwischen Ibuprofen und Covid19 handelt es sich um #FakeNews, die in keinerlei Verbindung mit der #MedUniWien stehen.", "https://twitter.com/MedUni_Wien/status/1238782938344554496", "https://pbs.twimg.com/profile_images/1144501389290299392/NT-KR-vT_400x400.jpg", "Twitter"],
+	"Deutschland und die USA konkurrieren um ein Tübinger Unternehmen, das an einem Impfstoff gegen": ["CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt.", "https://www.spiegel.de/wissenschaft/medizin/corona-impfstoff-deutsche-firma-curevac-dementiert-us-angebot-a-d9e201a9-bb4c-4d14-8c86-987a36ea20ca", "https://media.cdnandroid.com/item_images/147158/imagen-spiegel-online-news-0big.jpg", "Speigel"],
+	"The Trump administration attempted to persuade a German firm developing a possible vaccine for coronavirus to move its research work to the United States,": ["CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt.", "https://www.spiegel.de/wissenschaft/medizin/corona-impfstoff-deutsche-firma-curevac-dementiert-us-angebot-a-d9e201a9-bb4c-4d14-8c86-987a36ea20ca", "https://media.cdnandroid.com/item_images/147158/imagen-spiegel-online-news-0big.jpg", "Speigel"]
 }
 
 
@@ -189,9 +189,9 @@ async function nlpStuff(event){
 				    		// node.outerHTML = '<div id=' + div_id + '>' + node.outerHTML + '</div>';
 				    		node.outerHTML = '<div id=' + div_id + ' class="tooltip">'
 								+ node.outerHTML + '<span class="tooltiptext" font-family="Crimson Text"> ' +
-								'<img src="https://pbs.twimg.com/profile_images/1144501389290299392/NT-KR-vT_400x400.jpg">' +
+								'<img src="' + corrections[key][2] + '">' +
 								corrections[key][0] + ' ' +
-								'<a href='+ corrections[key][1] +' color="blue">(Quelle)</a></span></div>'
+								'<a href='+ corrections[key][1] +' color="blue">(' + corrections[key][3] + ')</a></span></div>'
 			    		var div = document.getElementById(div_id);
 			    		div.addEventListener("mouseover", makealert);
 			    		div.correct = corrections[key]
