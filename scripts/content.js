@@ -8,10 +8,9 @@
 
 // the dictionary which holds the combination of our corrections
 var corrections = {
-	"A vaccine would help, but that could be 18 months away.": "it can take upto 12 months for the coronavirus vaccine to be here",
-	"Das Virus steht weder in Zusammenhang mit Mobilfunk im Allgemeinen, noch mit dem neuen Übertragungsstandard 5G.": "5G is not related to the spread of Coronavirus",
-	"wonach US-Präsident Donald Trump sich Zugriff auf das Unternehmen": "wonach US-Präsident Donald Trump sich Zugriff auf das Unternehmen sichern wolle ist nicht richtig",
-	"Bis ein Impfstoff gegen das neue Coronavirus Sars-CoV-2 für den Einsatz am Patienten fertig ist, wird noch einige Zeit vergehen.": "Es wird ungefähr 6-12 Monate dauern, bis der Impfstoff fertig ist"
+	"Beschleunigt und sogar zum Tod führen kann.. Also an Alle Entfernt die Ibu Pillen das ist der Tod in Pillenform": "Achtung, bei den derzeit kursierenden WhatsApp-Text- und Sprachnachrichten rund um angebliche Forschungsergebnisse der 'Wiener Uniklinik' zu einem Zusammenhang zwischen Ibuprofen und Covid19 handelt es sich um #FakeNews, die in keinerlei Verbindung mit der #MedUniWien stehen.",
+	"Deutschland und die USA konkurrieren um ein Tübinger Unternehmen, das an einem Impfstoff gegen": "CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt.",
+	"The Trump administration attempted to persuade a German firm developing a possible vaccine for coronavirus to move its research work to the United States,": "CureVac dementiert US-Übernahmeangebot: Um die deutsche Impfstoff-Firma CureVac hat es einige Aufregung gegeben. Grund war ein angebliches Übernahmeangebot durch die Trump-Regierung. Doch das habe es nie gegeben, sagt die Firma jetzt."
 }
 
 
@@ -28,6 +27,11 @@ function makealert(evt) {
     //    console.log(response.returnMsg);
     //});
 
+}
+
+// make a promise and sleep for the given ms
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /*
@@ -106,6 +110,8 @@ document.addEventListener('readystatechange', event => nlpStuff(event), false);
 async function nlpStuff(event){
    // console.log("tensor flow backend: ", tf.getBackend());
    // console.log("ML5 version: " + ml5.version);
+
+   /*
 	modelURL = chrome.runtime.getURL('scripts/data/word-embeddings.json');
 	const model = await loadModel(modelURL);
 
@@ -121,6 +127,7 @@ async function nlpStuff(event){
 	    sum = tf.div(sum, tf.scalar(keywordsLength));
 	    keywordVectors.push(sum);
 	});
+	*/
 
 	// const word2vec = ml5.word2vec(modelURL, modelLoaded);
 	// console.log(word2vec.subtract(['queen', 'king'], 1, operationDone));
@@ -128,10 +135,17 @@ async function nlpStuff(event){
 	}
 
 	if (event.target.readyState === "complete") {
+			await sleep(6000);
 	    	let i = 0;
-		    var pTags = document.querySelectorAll('p');
+	    	if (document.location.hostname === "twitter.com") {
+		    	var pTags = document.querySelectorAll('span.css-901oao');
+			}
+			else {
+				var pTags = document.querySelectorAll('p');
+			}
 		    [].forEach.call(pTags, function(node) {
-		    	text = node.textContent;
+		    	// console.log(node.textContent);
+		    /*	text = node.textContent;
 		    	textLength = text.length;
 		    	if (textLength < 16 || textLength > 512){
 		    		return; // stop processing this p tag element further if the length is between certain bounds
@@ -167,7 +181,7 @@ async function nlpStuff(event){
 				    	}
 				    }
 				}
-				/*
+				*/
 		    	Object.keys(corrections).forEach(function(key) {
 			    	if (node.textContent.includes(key)){
 			    		let div_id = 'div-' + i;
@@ -182,7 +196,6 @@ async function nlpStuff(event){
 			    		i++;
 			    	}
 			    }); 
-			    */
 		});
 	}
 }
