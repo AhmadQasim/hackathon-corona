@@ -25,11 +25,16 @@ chrome.runtime.onInstalled.addListener(function() {
 // show the notification with myth and correction in the same message
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     chrome.notifications.create(
-        'name-for-notification',
+        "notification-" + request.notif_id,
         {   
+            type: 'basic', 
+            iconUrl: 'https://www.tf.uni-freiburg.de/de/bilder/icons/achtung.png/image', 
+            title: "Achtung!", 
+            priority: 1,
+            message: request.myth + request.correct
             type: 'list',
-            iconUrl: 'https://image.flaticon.com/icons/svg/2709/2709163.svg', 
-            title: "CoVid Mythbuster", 
+            iconUrl: 'https://image.flaticon.com/icons/svg/2709/2709163.svg',
+            title: "CoVid Mythbuster",
             message: " abc ",
             items: [{ title: "Myth", message: request.myth},
                     { title: "Fact", message: request.correct}]
