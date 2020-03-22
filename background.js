@@ -25,11 +25,12 @@ chrome.runtime.onInstalled.addListener(function() {
 // show the notification with myth and correction in the same message
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     chrome.notifications.create(
-        'name-for-notification',
+        "notification-" + request.notif_id,
         {   
             type: 'basic', 
             iconUrl: 'https://www.tf.uni-freiburg.de/de/bilder/icons/achtung.png/image', 
             title: "Achtung!", 
+            priority: 1,
             message: request.myth + request.correct 
         },
         function(notificationId) {} 
