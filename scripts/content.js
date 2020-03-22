@@ -151,7 +151,7 @@ async function nlpStuff(event){
 				    	dist = tf.losses.cosineDistance(sum, keywordVectors[j]);
 				    	if (dist.dataSync() > 0.7){
 				    		let div_id = 'div-' + i;
-				    		node.style.backgroundColor = "#C5FFBD";
+				    		node.style.backgroundColor = "#FCCCC1";
 				    		// node.outerHTML = '<div id=' + div_id + '>' + node.outerHTML + '</div>';
 				    		node.outerHTML = '<div id=' + div_id + ' class="tooltip">'
 								+ node.outerHTML + '<span class="tooltiptext" font-family="Crimson Text"> ' +

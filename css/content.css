@@ -9,9 +9,8 @@
   background-color: white;
   color: black;
   padding: 5px 0;
-  border-color: #D3D2D2;
-  border-width: medium;
   text-align: left;
+  box-shadow: 2px 2px #817E7E;
   
   /* Position the tooltip */
   position: absolute;
@@ -20,20 +19,23 @@
   left: 50%;
   margin-left: -60px;
   width: 300px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   float: left;
+  margin-right: 8px;
 }
 
 span {
-  font-size: small;
+  font-size: 15px;
 }
 
-a {
-  font-size: small;
+.tooltiptext a {
+  font-size: 15px;
 }
 
 .tooltip:hover .tooltiptext {
